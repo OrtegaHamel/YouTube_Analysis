@@ -68,4 +68,4 @@ Instala las librerías necesarias ejecutando el siguiente comando en tu terminal
 Álvaro Ortega Hamel — Desarrollo, análisis y documentación del proyecto.
 
 ## Licencia
-Este proyecto fue desarrollado con fines académicos y educativos.
+MIT license
