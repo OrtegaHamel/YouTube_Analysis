@@ -43,13 +43,26 @@ La pertinencia e innovación de este proyecto se sustentan sobre tres pilares an
 * **Desarrollar el Módulo Predictivo de Simulación en Tiempo Real:** Configurar una interfaz de software (El Predictor) que consuma el pipeline entrenado para procesar las variables de configuración del creador antes del estreno y devuelva una estimación cuantitativa del Índice de Velocidad de Tracción Esperado (`views/elapsedtime`), minimizando la desviación del MAE (Error Absoluto Medio) frente al comportamiento real observacional.
 * **Construir el Módulo Prescriptivo de Recomendación Estratégica:** Estructurar un motor de reglas automatizado (El Optimizador) basado en la extracción de fronteras de decisión y Gráficos de Dependencia Parcial (PDP) que le permita al sistema prescribir científicamente los "puntos dulces" empíricos de lanzamiento (la combinación ideal de día, hora y duración) para maximizar el retorno de inversión (ROI) en una categoría temática específica.
 
-## Instrucciones para Ejecutar
+## Instrucciones de Ejecución
 
-1. Clonar o descargar el repositorio.
-2. Ejecutar requirements.txt para instalar las librerías necesarias.
-3. Abrir los notebooks de Jupyter incluidos en el proyecto.
-4. Ejecutar las celdas en orden para reproducir el análisis exploratorio.
-5. Revisar las visualizaciones, hallazgos y conclusiones obtenidas.
+Para reproducir el análisis de este proyecto, sigue estos pasos:
+
+### Configuración del Entorno  
+Clona este repositorio en tu equipo local.  
+
+### Instalación de Dependencias  
+Instala las librerías necesarias ejecutando el siguiente comando en tu terminal:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### Preparación de Datos
+* **Nota Importante:** Debido a las limitaciones de tamaño en el repositorio, el dataset `4_YouTubeDataset_withChannelElapsed.csv` no se encuentra incluido.
+* **Acción requerida:** Descarga el archivo y ubícalo dentro de la carpeta `/data/` para asegurar que el código pueda localizarlo correctamente.
+
+### Ejecución
+1. **Entorno**: Abre los *Notebooks* de Jupyter (`.ipynb`) utilizando tu entorno de desarrollo configurado.
+2. **Proceso**: Ejecuta las celdas en orden secuencial para cargar los datos, procesarlos y visualizar los hallazgos del análisis.
 
 ## Autor
 Álvaro Ortega Hamel — Desarrollo, análisis y documentación del proyecto.
