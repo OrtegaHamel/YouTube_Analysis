@@ -1,7 +1,9 @@
-# Análisis Inicial y Selección de Problema
+# Simulador y Optimizador de Tracción para YouTube - v2.0.0
 
 ## Descripción
-Este proyecto tiene como objetivo realizar un análisis exploratorio de datos (EDA) sobre distintos conjuntos de datos para identificar sus características, calidad y desafíos. A partir de este análisis, se selecciona un conjunto de datos y una problemática específica para desarrollar en etapas posteriores, justificando su relevancia y potencial de aplicación en técnicas de ciencia de datos y aprendizaje automático.
+Este proyecto tiene como objetivo realizar un análisis exploratorio de datos (EDA) sobre distintos conjuntos de datos para identificar sus características, calidad y desafíos. A partir de este análisis, se selecciona un conjunto de datos y una problemática específica para desarrollar en etapas posteriores, justificando su relevancia y potencial de aplicación en técnicas de ciencia de datos y aprendizaje automático. Finalmente, se busca realizar el preprocesamiento de datos y la optimización de modelos de machine learning para el conjunto de datos seleccionado. La meta es elegir la técnica de machine learning más adecuada y optimizar sus hiperparámetros para obtener el mejor rendimiento posible.
+
+# Análisis Inicial y Selección de Problema
 
 ## Conjuntos de Datos Analizados
 Descripción breve de los cuatro conjuntos de datos analizados.
@@ -41,7 +43,31 @@ La pertinencia e innovación de este proyecto se sustentan sobre tres pilares an
 * **Diseñar un Pipeline de Preprocesamiento Automatizado (`ColumnTransformer`):** Construir un flujo de ingeniería de características robusto y reproducible en Python que descomponga estampas temporales complejas mediante el accesor `.dt` en variables cíclicas discretas (año, mes, día y hora) y aplique estrategias avanzadas de codificación no lineal (como *Target Encoding* supervisado o agregación volumétrica) para intermediar de forma eficiente la alta cardinalidad de creadores (`channelId` con casi medio millón de valores únicos) sin colapsar la memoria del sistema.
 * **Implementar y Calibrar Modelos de Ensamble basados en Árboles No Paramétricos:** Desarrollar y evaluar algoritmos avanzados como *Random Forest*, *XGBoost* o *LightGBM* capaces de capturar interacciones complejas no lineales entre la duración, temática y temporalidad, optimizando sus hiperparámetros (`max_depth`, `min_samples_leaf`) mediante `GridSearchCV` con validación cruzada ($cv=5$) para mitigar activamente el sobreajuste provocado por el desbalance intrínseco de la muestra.
 * **Desarrollar el Módulo Predictivo de Simulación en Tiempo Real:** Configurar una interfaz de software (El Predictor) que consuma el pipeline entrenado para procesar las variables de configuración del creador antes del estreno y devuelva una estimación cuantitativa del Índice de Velocidad de Tracción Esperado (`views/elapsedtime`), minimizando la desviación del MAE (Error Absoluto Medio) frente al comportamiento real observacional.
-* **Construir el Módulo Prescriptivo de Recomendación Estratégica:** Estructurar un motor de reglas automatizado (El Optimizador) basado en la extracción de fronteras de decisión y Gráficos de Dependencia Parcial (PDP) que le permita al sistema prescribir científicamente los "puntos dulces" empíricos de lanzamiento (la combinación ideal de día, hora y duración) para maximizar el retorno de inversión (ROI) en una categoría temática específica.
+* **Construir el Módulo Prescriptivo de Recomendación Estratégica:** Estructurar un motor de reglas automatizado (El Optimizador) basado en la extracción de fronteras de decisión y Gráficos de Dependencia Parcial (PDP) que le permita al sistema prescribir científicamente los "puntos dulces" empíricos de lanzamiento (la combinación ideal de día, hora y duración) para maximizar el retorno de inversión (ROI) en una categoría temática específica.  
+
+## Resumen de Resultados
+
+### 1. Importancia de Variables (Enfoque de Negocio)
+El modelo final basado en **LightGBM** identificó las siguientes características clave mediante el análisis de Ganancia (*Gain*):
+
+| Posición | Variable | Importancia por GAIN (Poder Predictivo) | Importancia por SPLIT (Frecuencia) |
+| :---: | :--- | :---: | :---: |
+| 1 | `channelId` | 610,381,664.0 | 102 |
+| 2 | `videoCount` | 385,028,518.0 | 222 |
+| 3 | `subscriberCount` | 124,061,355.0 | 98 |
+| 4 | `channelViewCount` | 110,462,514.0 | 108 |
+| 5 | `publish_hour` | **91,989,048.0** | **100** |
+
+*Nota: La alta relevancia de `publish_hour` valida matemáticamente la viabilidad del Módulo Optimizador para recetar ventanas óptimas de lanzamiento.*
+
+### 2. Comparativa Evolutiva de Modelos
+A través del ciclo de desarrollo se lograron los siguientes hitos de precisión en el conjunto de prueba independiente:
+
+| Módulo del Proceso | MAE en Set de Test | R² en Set de Test | Estado y Progreso |
+| :--- | :---: | :---: | :--- |
+| **Modelo Inicial (Base)** | 2.4636 | 0.0147 | Desempeño por defecto inicial. |
+| **GridSearchCV Exhaustivo** | 2.1281 | -0.0739 | Ajuste por grilla discreta rígida. |
+| **Optuna (Optimización Bayesiana)** | **1.9727** | **0.0107** | **Ganador Definitivo (Reducción del ~20% del error)** |
 
 ## Instrucciones de Ejecución
 
